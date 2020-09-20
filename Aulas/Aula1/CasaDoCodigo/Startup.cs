@@ -19,7 +19,6 @@ namespace CasaDoCodigo
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -29,8 +28,7 @@ namespace CasaDoCodigo
             services.AddDbContext<Applicationcontext>(op => op.UseSqlServer(connectionString));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -50,6 +48,10 @@ namespace CasaDoCodigo
                     name: "default",
                     template: "{controller=Pedido}/{action=Carrossel}/{id?}");
             });
+
+            // Dessa forma garantimos que o banco de dados seja criado caso nao exista.
+            // Injeçao de dependencia utilizando Interface
+            serviceProvider.GetService<Applicationcontext>().Database.EnsureCreated();
         }
     }
 }
