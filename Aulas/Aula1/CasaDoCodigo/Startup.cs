@@ -51,7 +51,10 @@ namespace CasaDoCodigo
 
             // Dessa forma garantimos que o banco de dados seja criado caso nao exista.
             // Injeçao de dependencia utilizando Interface
-            serviceProvider.GetService<Applicationcontext>().Database.EnsureCreated();
+            //serviceProvider.GetService<Applicationcontext>().Database.EnsureCreated();
+
+            //Utilizando Migrate() eu posso utilizar migraçoes futuramente..utilizando Ensure Created eu nao possu utilizar migraçoes apos o banco ser criado
+            serviceProvider.GetService<Applicationcontext>().Database.Migrate();
         }
     }
 }
