@@ -26,6 +26,8 @@ namespace CasaDoCodigo
             string connectionString = Configuration.GetConnectionString("Default");
 
             services.AddDbContext<Applicationcontext>(op => op.UseSqlServer(connectionString));
+
+            services.AddTransient<IDataService, DataService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
@@ -54,7 +56,8 @@ namespace CasaDoCodigo
             //serviceProvider.GetService<Applicationcontext>().Database.EnsureCreated();
 
             //Utilizando Migrate() eu posso utilizar migraçoes futuramente..utilizando Ensure Created eu nao possu utilizar migraçoes apos o banco ser criado
-            serviceProvider.GetService<Applicationcontext>().Database.Migrate();
+            serviceProvider.GetService<IDataService>().InicializaDB();
         }
     }
+
 }
