@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,8 @@ namespace CasaDoCodigo
             services.AddDbContext<Applicationcontext>(op => op.UseSqlServer(connectionString));
 
             services.AddTransient<IDataService, DataService>();
+
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
