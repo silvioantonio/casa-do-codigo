@@ -44,6 +44,7 @@ namespace CasaDoCodigo.Controllers
             return View(carrinhoViewModel);
         }
 
+        [HttpPost]
         public IActionResult Resumo()
         {
             Pedido pedido = pedidoRepository.GetPedido();
