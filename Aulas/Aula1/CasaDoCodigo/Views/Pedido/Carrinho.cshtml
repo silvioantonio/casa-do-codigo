@@ -33,7 +33,7 @@
         @{
             foreach (var item in Model)
             {
-                <div class="row row-center linha-produto">
+                <div class="row row-center linha-produto" item-id="@item.Id">
                     <div class="col-md-3">
                         <img class="img-produto-carrinho" src="/images/produtos/large_@(item.Produto.Codigo).jpg" />
                     </div>
@@ -49,7 +49,7 @@
                             <input type="text" value="@(item.Quantidade)"
                                    class="form-control text-center" />
                             <span class="input-group-btn">
-                                <button class="btn btn-default" onclick="clickIncremento()">
+                                <button class="btn btn-default" onclick="clickIncremento(this)">
                                     <span class="glyphicon-plus"></span>
                                 </button>
                             </span>
@@ -101,7 +101,9 @@
 
     <script type="text/javascript">
 
-        function clickIncremento() {
+        function clickIncremento(btn) {
+
+            var itemId = $(btn).attr('item-id');
 
         }
 
