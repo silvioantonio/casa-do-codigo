@@ -15,6 +15,11 @@ namespace CasaDoCodigo.Repositories
             this.applicationcontext = applicationcontext;
         }
 
+        public IList<Produto> GetProdutos()
+        {
+            return applicationcontext.Set<Produto>().ToList();
+        }
+
         public void SaveProdutos(List<Livro> livros)
         {
             foreach (var livro in livros)
@@ -27,7 +32,7 @@ namespace CasaDoCodigo.Repositories
         }
 
     }
-    class Livro
+    public class Livro
     {
         public string Codigo { get; set; }
         public string Nome { get; set; }
