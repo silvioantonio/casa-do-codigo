@@ -1,6 +1,7 @@
 ﻿using CasaDoCodigo.Models;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,11 @@ namespace CasaDoCodigo.Repositories
         public Pedido GetPedido()
         {
             var pedidoId = GetPedidoId();
-            var pedido = dbSets.Where(p => p.Id == pedidoId).SingleOrDefault();
+            var pedido = dbSets
+                .Include(p=>p.Itens)
+                .ThenInclude(i=>i.Produto)
+                .Where(p => p.Id == pedidoId)
+                .SingleOrDefault();
 
             if (pedido == null)
             {
