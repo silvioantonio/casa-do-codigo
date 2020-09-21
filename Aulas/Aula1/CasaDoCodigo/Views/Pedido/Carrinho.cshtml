@@ -4,7 +4,7 @@
 
 }
 
-@model IList<ItemPedido>;
+@model CarrinhoViewModel;
 
 <h3>Meu Carrinho</h3>
 
@@ -31,7 +31,7 @@
     <div class="panel-body">
 
         @{
-            foreach (var item in Model)
+            foreach (var item in Model.Itens)
             {
                 <div class="row row-center linha-produto" item-id="@item.Id">
                     <div class="col-md-3">
@@ -42,14 +42,14 @@
                     <div class="col-md-2 text-center">
                         <div class="input-group">
                             <span class="input-group-btn">
-                                <button class="btn btn-default">
+                                <button class="btn btn-default" onclick="carrinho.clickDecremento(this)" onblur="carrinho.updateQuantidade(this)">
                                     <span class="glyphicon-minus"></span>
                                 </button>
                             </span>
                             <input type="text" value="@(item.Quantidade)"
                                    class="form-control text-center" />
                             <span class="input-group-btn">
-                                <button class="btn btn-default" onclick="clickIncremento(this)">
+                                <button class="btn btn-default" onclick="carrinho.clickIncremento(this)">
                                     <span class="glyphicon-plus"></span>
                                 </button>
                             </span>
@@ -71,13 +71,13 @@
         <div class="row">
             <div class="col-md-10">
                 <span numero-itens>
-                    Total: @(Model.Count())
+                    Total: @(Model.Itens.Count())
                     itens
                 </span>
             </div>
             <div class="col-md-2">
                 Total: R$ <span class="pull-right" total>
-                    @(Model.Sum(i=>i.Quantidade * i.PrecoUnitario))
+                    @(Model.Total)
                 </span>
             </div>
         </div>
@@ -99,30 +99,9 @@
 
 @section Scripts{ 
 
-    <script type="text/javascript">
+    <script src="~/js/carrinho.js" type="text/javascript">
 
-        function clickIncremento(btn) {
-
-            var linhaItem = $(btn).parents('[item-id]');
-
-            var itemId = $(linhaItem).attr('item-id');
-
-            var novaQuantidade = $(linhaItem).find('input').val();
-
-            var data = {
-                Id: itemId,
-                Quantidade: novaQuantidade
-            };
-
-            $.ajax({
-                url: '/pedido/updatequantidade',
-                type: 'POST',
-                contentType: 'application/json',
-                data: data
-            });
-
-        }
-
+        
     </script>
 
 }
