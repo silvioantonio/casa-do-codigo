@@ -72,6 +72,19 @@ namespace CasaDoCodigo.Models
 
         [Required(ErrorMessage = "CEP é obrigatorio")]
         public string CEP { get; set; } = "";
+
+        internal void Update(Cadastro novoCadastro)
+        {
+            this.Nome = novoCadastro.Nome;
+            this.Bairro = novoCadastro.Bairro;
+            this.CEP = novoCadastro.CEP;
+            this.Complemento = novoCadastro.Complemento;
+            this.Email = novoCadastro.Email;
+            this.Endereco = novoCadastro.Endereco;
+            this.Municipio = novoCadastro.Municipio;
+            this.Telefone = novoCadastro.Telefone;
+            this.UF = novoCadastro.UF;
+        }
     }
 
     [DataContract]
