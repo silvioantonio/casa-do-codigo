@@ -41,8 +41,12 @@ namespace CasaDoCodigo.Repositories
             if (itemPedido == null)
             {
                 itemPedido = new ItemPedido(pedido, produto, 1, produto.Preco);
+
                 applicationcontext.Set<ItemPedido>().Add(itemPedido);
+
                 applicationcontext.SaveChanges();
+
+                SetPedidoId(pedido.Id);
             }
         }
 

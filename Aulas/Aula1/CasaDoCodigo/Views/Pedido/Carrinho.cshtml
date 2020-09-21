@@ -37,8 +37,8 @@
                     <div class="col-md-3">
                         <img class="img-produto-carrinho" src="/images/produtos/large_@(item.Produto.Codigo).jpg" />
                     </div>
-                    <div class="col-md-3">@item.Produto.Nome</div>
-                    <div class="col-md-2 text-center">@item.PrecoUnitario</div>
+                    <div class="col-md-3">@(item.Produto.Nome)</div>
+                    <div class="col-md-2 text-center">@(item.PrecoUnitario)</div>
                     <div class="col-md-2 text-center">
                         <div class="input-group">
                             <span class="input-group-btn">
@@ -71,7 +71,7 @@
         <div class="row">
             <div class="col-md-10">
                 <span numero-itens>
-                    Total: @(Model.Count)
+                    Total: @(Model.Count())
                     itens
                 </span>
             </div>

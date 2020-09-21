@@ -100,7 +100,8 @@ namespace CasaDoCodigo.Models
             Cadastro = cadastro;
         }
 
-        public List<ItemPedido> Itens { get; private set; } = new List<ItemPedido>();
+        public IList<ItemPedido> Itens { get; private set; }
+
         [Required]
         public virtual Cadastro Cadastro { get; private set; }
     }
