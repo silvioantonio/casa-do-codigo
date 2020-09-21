@@ -30,10 +30,12 @@ class Carrinho {
 
         let novaQuantidade = $(linhaItem).find('input').val();
 
-        return data = {
+        let data = {
             Id: itemId,
             Quantidade: novaQuantidade
         };
+
+        return data;
     }
 
     postQuantidade(data) {
@@ -41,9 +43,24 @@ class Carrinho {
             url: '/pedido/updatequantidade',
             type: 'POST',
             contentType: 'application/json',
-            data: data
-        }).done(function(response) {
-            location.reload()
+            data: JSON.stringify(data)
+        }).done(function (response) {
+
+            let itemPedido = response.itemPedido;
+            let linhaDoItem = $('[item-id=' + itemPedido.Id + ']');
+            linhaDoItem.find('input').val(itemPedido.Quantidade);
+            linhaDoItem.find('[subtotal]').html((itemPedido.subtotal).duasCasas());
+
+            let carrinhoViewModel = response.carrinhoViewModel;
+
+            $('[numero-itens]').html('Total: ' + carrinhoViewModel.itens.length + ' itens');
+
+            $('[total]').html((carrinhoViewModel.Total).duasCasas());
+
+            if (itemPedido.Quantidade == 0) {
+                linhaDoItem.remove();
+            }
+
         });
     }
 }
