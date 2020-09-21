@@ -1,9 +1,9 @@
-﻿
+﻿<!--Para declarar com qual qual modelo a página Razor irá trabalhar, utilizamos a diretiva 'model' (inicial em minúscula)-->
 @model List<Produto>;
 
 <h3>Catálogo</h3>
 
-
+<!--Para acessar as propriedades do modelo, precisamos utilizar o objeto Model (inicial em maiúscula)-->
 @foreach (var produto in Model)
 {
     <div>@produto.Nome</div>
