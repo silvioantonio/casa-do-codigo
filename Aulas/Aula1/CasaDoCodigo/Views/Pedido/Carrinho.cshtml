@@ -103,7 +103,23 @@
 
         function clickIncremento(btn) {
 
-            var itemId = $(btn).attr('item-id');
+            var linhaItem = $(btn).parents('[item-id]');
+
+            var itemId = $(linhaItem).attr('item-id');
+
+            var novaQuantidade = $(linhaItem).find('input').val();
+
+            var data = {
+                Id: itemId,
+                Quantidade: novaQuantidade
+            };
+
+            $.ajax({
+                url: '/pedido/updatequantidade',
+                type: 'POST',
+                contentType: 'application/json',
+                data: data
+            });
 
         }
 
