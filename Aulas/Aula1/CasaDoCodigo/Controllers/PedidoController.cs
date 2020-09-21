@@ -47,8 +47,14 @@ namespace CasaDoCodigo.Controllers
         [HttpPost]
         public IActionResult Resumo(Cadastro cadastro)
         {
-            Pedido pedido = pedidoRepository.GetPedido();
-            return View(pedido);
+            // Valida os dados no servidor...
+            if (ModelState.IsValid)
+            {
+                return View(pedidoRepository.UpdateCadastro(cadastro));
+            }
+
+            return RedirectToAction("Cadastro");
+           
         }
 
         [HttpPost]
