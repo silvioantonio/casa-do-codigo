@@ -30,12 +30,11 @@ class Carrinho {
 
         let novaQuantidade = $(linhaItem).find('input').val();
 
-        let data = {
+        return  {
             Id: itemId,
             Quantidade: novaQuantidade
         };
 
-        return data;
     }
 
     postQuantidade(data) {
@@ -47,20 +46,20 @@ class Carrinho {
         }).done(function (response) {
 
             let itemPedido = response.itemPedido;
-            let linhaDoItem = $('[item-id=' + itemPedido.Id + ']');
-            linhaDoItem.find('input').val(itemPedido.Quantidade);
-            linhaDoItem.find('[subtotal]').html((itemPedido.subtotal).duasCasas());
+            let linhaDoItem = $('[item-id=' + itemPedido.id + ']');
+            linhaDoItem.find('input').val(itemPedido.quantidade);
+            linhaDoItem.find('[subtotal]').html(itemPedido.subTotal);
 
             let carrinhoViewModel = response.carrinhoViewModel;
 
             $('[numero-itens]').html('Total: ' + carrinhoViewModel.itens.length + ' itens');
 
-            $('[total]').html((carrinhoViewModel.Total).duasCasas());
+            $('[total]').html(carrinhoViewModel.total);
 
-            if (itemPedido.Quantidade == 0) {
+            if (itemPedido.quantidade == 0) {
                 linhaDoItem.remove();
             }
-
+            debugger;
         });
     }
 }

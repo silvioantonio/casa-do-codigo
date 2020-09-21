@@ -21,7 +21,9 @@ namespace CasaDoCodigo.Repositories
         private readonly IHttpContextAccessor contextAccessor;
         private readonly IItemPedidoRepository iItemPedidoRepository;
 
-        public PedidoRepository(Applicationcontext applicationcontext, IHttpContextAccessor contextAccessor, IItemPedidoRepository iItemPedidoRepository) : base(applicationcontext)
+        public PedidoRepository(Applicationcontext applicationcontext,
+            IHttpContextAccessor contextAccessor,
+            IItemPedidoRepository iItemPedidoRepository) : base(applicationcontext)
         {
             this.contextAccessor = contextAccessor;
             this.iItemPedidoRepository = iItemPedidoRepository;
